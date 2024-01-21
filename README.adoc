@@ -8,7 +8,7 @@ toc::[]
 == Introduction
 
 Jima Security is a security system for the Jima framework.
-It provides authentication and authorization services for the Jima framework.
+It provides base security config for the Jima framework.
 It is built on top of the Spring Security framework.
 It provides RESTful, gRPC and RSocket security component for the Jima framework.
 
