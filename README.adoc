@@ -1,0 +1,80 @@
+= Jima Security
+:toc: macro
+:toc-title:
+:doctype: book
+
+toc::[]
+
+== Introduction
+
+Jima Security is a security system for the Jima framework.
+It provides authentication and authorization services for the Jima framework.
+It is built on top of the Spring Security framework.
+It provides RESTful, gRPC and RSocket security component for the Jima framework.
+
+== Prerequisites
+
+Before you begin, ensure you have the following software and tools installed:
+
+* Java
+* Maven
+
+== Getting Started
+
+Follow these steps to get started with the Jima CRUD project:
+
+1. Clone the repository.
+2. Install all the software and tools listed in the Prerequisites section.
+3. Install the npm dependencies.
+4. Install the project with the `mvn install` command.
+
+You can also add the following dependency to the `pom.xml` file of your project:
+
+[source,xml]
+----
+<dependencies>
+    <dependency>
+        <groupId>ir.msob.jima.security</groupId>
+        <artifactId>security-*</artifactId>
+        <version>1.1.1</version>
+    </dependency>
+</dependencies>
+----
+
+== Modules
+
+=== Commons
+
+This module contains common utilities and components used across the project.
+
+=== API
+
+This module is divided into `restful`, `grpc` and `rsocket` submodules.
+
+==== RESTful
+
+This submodule provides RESTful APIs for the system.
+It includes an OAuth2 implementation.
+
+==== gRPC
+
+This submodule provides gRPC APIs for the system.
+It includes an OAuth2 implementation.
+
+==== RSocket
+
+This submodule provides RSocket APIs for the system.
+It includes an OAuth2 implementation.
+
+== Running the Tests
+
+To run the tests, use the `mvn test` command.
+
+== Contributing
+
+We welcome contributions to Jima!
+Please fork the repository, make your changes, and submit a pull request.
+
+== License
+
+Jima is licensed under the Apache License 2.0. Please see the `LICENSE` file for more details.
