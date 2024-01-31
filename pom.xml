@@ -20,6 +20,7 @@
     </properties>
     <modules>
         <module>commons</module>
+        <module>it</module>
         <module>api</module>
     </modules>
     <dependencyManagement>

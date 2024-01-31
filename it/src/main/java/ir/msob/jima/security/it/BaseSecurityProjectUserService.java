@@ -1,4 +1,4 @@
-package ir.msob.jima.security.api.restful.it;
+package ir.msob.jima.security.it;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.msob.jima.core.beans.configuration.JimaConfigProperties;

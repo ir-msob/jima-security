@@ -4,13 +4,13 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>ir.msob.jima.security</groupId>
-        <artifactId>security-api-restful</artifactId>
+        <artifactId>security-api-grpc</artifactId>
         <version>1.1.2</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>security-api-restful-it</artifactId>
+    <artifactId>security-api-grpc-it</artifactId>
     <name>it</name>
-    <description>it</description>
+    <description>ir</description>
     <packaging>jar</packaging>
     <dependencies>
         <!-- Msob -->
@@ -21,13 +21,8 @@
         </dependency>
         <dependency>
             <groupId>ir.msob.jima.security</groupId>
-            <artifactId>security-api-restful-oauth2</artifactId>
+            <artifactId>security-api-grpc-oauth2</artifactId>
             <version>${project.parent.version}</version>
-        </dependency>
-        <!-- Security -->
-        <dependency>
-            <groupId>com.c4-soft.springaddons</groupId>
-            <artifactId>spring-addons-oauth2-test</artifactId>
         </dependency>
     </dependencies>
 </project>

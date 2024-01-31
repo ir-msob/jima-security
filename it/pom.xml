@@ -4,30 +4,25 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>ir.msob.jima.security</groupId>
-        <artifactId>security-api-restful</artifactId>
+        <artifactId>security-parent</artifactId>
         <version>1.1.2</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>security-api-restful-it</artifactId>
+    <artifactId>security-it</artifactId>
     <name>it</name>
     <description>it</description>
-    <packaging>jar</packaging>
     <dependencies>
         <!-- Msob -->
         <dependency>
-            <groupId>ir.msob.jima.security</groupId>
-            <artifactId>security-it</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>ir.msob.jima.security</groupId>
-            <artifactId>security-api-restful-oauth2</artifactId>
-            <version>${project.parent.version}</version>
+            <groupId>ir.msob.jima.core</groupId>
+            <artifactId>core-beans</artifactId>
+            <version>${core-parent.version}</version>
         </dependency>
         <!-- Security -->
         <dependency>
-            <groupId>com.c4-soft.springaddons</groupId>
-            <artifactId>spring-addons-oauth2-test</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
         </dependency>
     </dependencies>
+
 </project>
