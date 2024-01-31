@@ -8,28 +8,20 @@
         <version>1.1.2</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>security-commons</artifactId>
-    <name>commons</name>
-    <description>commons</description>
+    <artifactId>security-it</artifactId>
+    <name>it</name>
+    <description>it</description>
     <dependencies>
-        <!-- Security -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-oauth2-jose</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-oauth2-client</artifactId>
-        </dependency>
         <!-- Msob -->
         <dependency>
             <groupId>ir.msob.jima.core</groupId>
-            <artifactId>core-commons</artifactId>
+            <artifactId>core-beans</artifactId>
             <version>${core-parent.version}</version>
+        </dependency>
+        <!-- Security -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
         </dependency>
     </dependencies>
 

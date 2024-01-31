@@ -5,21 +5,22 @@
     <parent>
         <groupId>ir.msob.jima.parent</groupId>
         <artifactId>jima-parent</artifactId>
-        <version>1.1.01</version>
+        <version>1.1.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>ir.msob.jima.security</groupId>
     <artifactId>security-parent</artifactId>
-    <version>1.1.1</version>
+    <version>1.1.2</version>
     <name>security-parent</name>
     <description>security-parent</description>
     <packaging>pom</packaging>
     <properties>
         <!-- MSob -->
-        <core-parent.version>1.1.4</core-parent.version>
+        <core-parent.version>1.1.6</core-parent.version>
     </properties>
     <modules>
         <module>commons</module>
+        <module>it</module>
         <module>api</module>
     </modules>
     <dependencyManagement>
