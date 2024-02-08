@@ -2,7 +2,7 @@ package ir.msob.jima.security.api.rsocket.oauth2;
 
 import io.rsocket.SocketAcceptor;
 import ir.msob.jima.core.api.rsocket.commons.BaseRSocketRequesterBuilder;
-import ir.msob.jima.core.beans.configuration.JimaConfigProperties;
+import ir.msob.jima.core.beans.properties.JimaProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.rsocket.RSocketRequester;
 import org.springframework.messaging.rsocket.RSocketStrategies;
@@ -20,7 +20,7 @@ import java.util.List;
 public class RSocketOauth2RequesterBuilder implements BaseRSocketRequesterBuilder {
     private final RSocketRequester.Builder rsocketRequesterBuilder;
     private final RSocketStrategies rsocketStrategies;
-    private final JimaConfigProperties jimaConfigProperties;
+    private final JimaProperties jimaProperties;
 
     /**
      * Returns a builder for RSocketRequester with OAuth2 authentication.
@@ -32,7 +32,7 @@ public class RSocketOauth2RequesterBuilder implements BaseRSocketRequesterBuilde
     public RSocketRequester.Builder getBuilder(Object... candidateHandlers) {
         return rsocketRequesterBuilder
                 .rsocketStrategies(rsocketStrategies.mutate().encoder(new BearerTokenAuthenticationEncoder()).build())
-                .rsocketConnector(connector -> connector.acceptor(getSocketAcceptor(List.of(candidateHandlers))).reconnect(jimaConfigProperties.getClient().getRetryConnection().createRetryBackoffSpec()));
+                .rsocketConnector(connector -> connector.acceptor(getSocketAcceptor(List.of(candidateHandlers))).reconnect(jimaProperties.getClient().getRetryConnection().createRetryBackoffSpec()));
     }
 
     /**

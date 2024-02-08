@@ -2,7 +2,7 @@ package ir.msob.jima.security.api.rsocket.oauth2;
 
 import io.rsocket.metadata.WellKnownMimeType;
 import ir.msob.jima.core.api.rsocket.commons.BaseRSocketRequesterMetadata;
-import ir.msob.jima.core.beans.configuration.JimaConfigProperties;
+import ir.msob.jima.core.beans.properties.JimaProperties;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.messaging.rsocket.RSocketRequester;
@@ -20,7 +20,7 @@ import org.springframework.util.MimeTypeUtils;
 @RequiredArgsConstructor
 public class RSocketRequesterMetadata implements BaseRSocketRequesterMetadata {
     private final AuthorizedClientServiceReactiveOAuth2AuthorizedClientManager authorizedClientManager;
-    private final JimaConfigProperties jimaConfigProperties;
+    private final JimaProperties jimaProperties;
 
     /**
      * Adds metadata to the provided RSocketRequester.MetadataSpec instance.
@@ -43,8 +43,8 @@ public class RSocketRequesterMetadata implements BaseRSocketRequesterMetadata {
     @SneakyThrows
     public String getTokenForClient() {
         return authorizedClientManager.authorize(
-                        OAuth2AuthorizeRequest.withClientRegistrationId(jimaConfigProperties.getSecurity().getDefaultClientRegistrationId())
-                                .principal(jimaConfigProperties.getSecurity().getDefaultClientRegistrationId())
+                        OAuth2AuthorizeRequest.withClientRegistrationId(jimaProperties.getSecurity().getDefaultClientRegistrationId())
+                                .principal(jimaProperties.getSecurity().getDefaultClientRegistrationId())
                                 .build())
                 .map(authorizedClient ->
                         authorizedClient.getAccessToken().getTokenValue()

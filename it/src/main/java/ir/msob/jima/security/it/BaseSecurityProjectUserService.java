@@ -1,7 +1,7 @@
 package ir.msob.jima.security.it;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import ir.msob.jima.core.beans.configuration.JimaConfigProperties;
+import ir.msob.jima.core.beans.properties.JimaProperties;
 import ir.msob.jima.core.commons.security.BaseUser;
 import ir.msob.jima.core.commons.security.BaseUserService;
 import ir.msob.jima.core.commons.security.ClaimKey;
@@ -19,7 +19,7 @@ import java.util.Optional;
 
 
 public interface BaseSecurityProjectUserService extends BaseUserService {
-    JimaConfigProperties getJimaConfigProperties();
+    JimaProperties getJimaProperties();
 
     ObjectMapper getObjectMapper();
 
@@ -54,7 +54,7 @@ public interface BaseSecurityProjectUserService extends BaseUserService {
 
     @Override
     default <ID extends Comparable<ID> & Serializable, USER extends BaseUser<ID>> Optional<USER> getUser(String userInfo, Map<String, Object> claims, Class<USER> userClass) {
-        if (claims.get(ClaimKey.SUBJECT).equals(getJimaConfigProperties().getSecurity().getDefaultClientRegistrationId())) {
+        if (claims.get(ClaimKey.SUBJECT).equals(getJimaProperties().getSecurity().getDefaultClientRegistrationId())) {
             if (Strings.isNotBlank(userInfo)) {
                 return getUser(userInfo, userClass);
             } else {
@@ -67,7 +67,7 @@ public interface BaseSecurityProjectUserService extends BaseUserService {
 
     @Override
     default <ID extends Comparable<ID> & Serializable, USER extends BaseUser<ID>> Optional<USER> getUser(USER user, Map<String, Object> claims) {
-        if (claims.get(ClaimKey.SUBJECT).equals(getJimaConfigProperties().getSecurity().getDefaultClientRegistrationId())) {
+        if (claims.get(ClaimKey.SUBJECT).equals(getJimaProperties().getSecurity().getDefaultClientRegistrationId())) {
             if (user != null) {
                 return Optional.of(user);
             } else {
@@ -80,7 +80,7 @@ public interface BaseSecurityProjectUserService extends BaseUserService {
 
     @Override
     default <ID extends Comparable<ID> & Serializable, USER extends BaseUser<ID>, P extends Principal> Optional<USER> getUser(String userInfo, P principal, Class<USER> userClass) {
-        if (principal.getName().equals(getJimaConfigProperties().getSecurity().getDefaultClientRegistrationId())) {
+        if (principal.getName().equals(getJimaProperties().getSecurity().getDefaultClientRegistrationId())) {
             if (Strings.isNotBlank(userInfo)) {
                 return getUser(userInfo, userClass);
             } else {
