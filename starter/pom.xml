@@ -4,16 +4,17 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>ir.msob.jima.security</groupId>
-        <artifactId>security-api</artifactId>
+        <artifactId>security-parent</artifactId>
         <version>1.1.4</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>security-api-rsocket</artifactId>
-    <name>rsocket</name>
-    <description>rsocket</description>
+    <artifactId>security-starter</artifactId>
+    <name>starter</name>
+    <description>starter</description>
     <packaging>pom</packaging>
     <modules>
-        <module>oauth2</module>
-        <module>it</module>
+        <module>restful-oauth2</module>
+        <module>rsocket-oauth2</module>
+        <module>grpc-oauth2</module>
     </modules>
 </project>
