@@ -1,0 +1,38 @@
+name: Pull Request - Maven Test
+on:
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+    - id: Checkout
+      name: Checkout
+      uses: actions/checkout@v4
+
+    - id: Setup_JDK_21
+      name: Set up JDK 21
+      uses: actions/setup-java@v4
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+        cache: maven
+
+    - id: Cache_Maven_Packages
+      name: Cache Maven Packages
+      uses: actions/cache@v4
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        restore-keys: |
+          ${{ runner.os }}-maven-
+
+    - id: Maven_Test
+      name: Maven Test
+      run: mvn clean test -P test
