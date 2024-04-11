@@ -22,15 +22,6 @@ import org.springframework.security.oauth2.server.resource.authentication.Reacti
  * Include this configuration class in your application's configuration to enable RSocket
  * security with OAuth2-based JWT authentication.
  * <p>
- * Example:
- * ```java
- *
- * @author Yaqub Abdi
- * @Configuration
- * @Import(RSocketConfiguration.class) public class RSocketSecurityConfig {
- * // Your additional RSocket and security configurations go here
- * }
- * ```
  * @since 0.1.0
  */
 @Configuration

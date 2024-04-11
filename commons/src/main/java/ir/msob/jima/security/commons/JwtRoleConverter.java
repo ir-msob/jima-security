@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * Converter class for extracting and converting JWT (JSON Web Token) claims related
- * to roles into a collection of Spring Security GrantedAuthority objects.
+ * to roles into a collection of Spring Security {@link GrantedAuthority} objects.
  * <p>
  * This class implements the Spring Framework Converter interface and is intended to
  * be used as part of the JWT decoding process to extract and convert role information
@@ -21,12 +21,15 @@ import java.util.List;
  * Usage:
  * This converter is typically used in conjunction with a ReactiveJwtDecoder when
  * configuring JWT decoding in a Spring Security context. It converts the 'roles' claim
- * from the JWT into a collection of GrantedAuthority objects.
+ * from the JWT into a collection of {@link GrantedAuthority} objects.
  * <p>
  * Example:
  * ```java
- * Jwt = // ... obtain JWT from the authentication token
+ * {@code
+ * JwtRoleConverter jwtRoleConverter = new JwtRoleConverter(); // Instantiate the converter
+ * Jwt jwt = // ... obtain JWT from the authentication token
  * Collection<GrantedAuthority> authorities = jwtRoleConverter.convert(jwt);
+ * }
  * // ... make use of the authorities in your security logic
  * ```
  *
