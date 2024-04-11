@@ -5,7 +5,7 @@
     <parent>
         <groupId>ir.msob.jima.security</groupId>
         <artifactId>security-starter</artifactId>
-        <version>1.1.4</version>
+        <version>1.1.5</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>security-starter-rsocket-oauth2</artifactId>
