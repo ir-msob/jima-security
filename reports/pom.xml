@@ -59,6 +59,11 @@
                     <artifactId>security-api-grpc-it</artifactId>
                     <version>${project.parent.version}</version>
                 </dependency>
+                <dependency>
+                    <groupId>ir.msob.jima.security</groupId>
+                    <artifactId>security-ral-keycloak-it</artifactId>
+                    <version>${project.parent.version}</version>
+                </dependency>
             </dependencies>
             <build>
                 <plugins>

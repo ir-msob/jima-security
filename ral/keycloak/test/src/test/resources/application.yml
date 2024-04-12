@@ -1,0 +1,19 @@
+jima:
+  test-container:
+    keycloak:
+      image: "quay.io/keycloak/keycloak:24.0"
+      realm: "test-realm"
+
+spring:
+  security:
+    oauth2:
+      resource-server:
+        jwt:
+          issuer-uri: http://localhost:8004
+      client:
+        provider:
+          service-client:
+            issuer-uri: ${spring.security.oauth2.resource-server.jwt.issuer-uri}
+
+keycloak:
+  enabled: true

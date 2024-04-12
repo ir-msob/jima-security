@@ -5,7 +5,7 @@
     <parent>
         <groupId>ir.msob.jima.parent</groupId>
         <artifactId>jima-parent</artifactId>
-        <version>1.1.7</version>
+        <version>1.1.8</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>ir.msob.jima.security</groupId>
@@ -21,12 +21,13 @@
     </scm>
     <properties>
         <!-- MSob -->
-        <core-parent.version>1.1.17</core-parent.version>
+        <core-parent.version>1.1.18</core-parent.version>
     </properties>
     <modules>
         <module>commons</module>
         <module>it</module>
         <module>api</module>
+        <module>ral</module>
         <module>starter</module>
         <module>reports</module>
     </modules>
