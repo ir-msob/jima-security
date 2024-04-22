@@ -21,7 +21,7 @@
     </scm>
     <properties>
         <!-- MSob -->
-        <core-parent.version>1.1.18</core-parent.version>
+        <core-parent.version>1.1.19</core-parent.version>
     </properties>
     <modules>
         <module>commons</module>
