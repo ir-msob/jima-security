@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ContextConfiguration
 @Testcontainers
 @CommonsLog
-public class KeycloakContainerConfigurationIT {
+class KeycloakContainerConfigurationIT {
 
     @Value("${spring.security.oauth2.resource-server.jwt.issuer-uri}")
     private String configUrl;
@@ -30,14 +30,14 @@ public class KeycloakContainerConfigurationIT {
 
     @Test
     @DisplayName("Container is running after initialization")
-    public void containerIsRunningAfterInitialization() {
+    void containerIsRunningAfterInitialization() {
         assertTrue(container.isRunning(), "Container should be running after initialization");
     }
 
 
     @Test
     @DisplayName("Properties are set correctly")
-    public void testContainerProperties() {
+    void testContainerProperties() {
         String containerUrl = container.getAuthServerUrl() + "/realms/" + jimaProperties.getTestContainer().getKeycloak().getRealm();
         assertEquals(containerUrl, configUrl);
     }

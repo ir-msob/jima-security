@@ -5,7 +5,7 @@
     <parent>
         <groupId>ir.msob.jima.security</groupId>
         <artifactId>security-api-rsocket</artifactId>
-        <version>1.1.6</version>
+        <version>1.1.7</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>security-api-rsocket-it</artifactId>

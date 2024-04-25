@@ -36,7 +36,7 @@ You can also add the following dependency to the `pom.xml` file of your project:
     <dependency>
         <groupId>ir.msob.jima.security</groupId>
         <artifactId>security-starter-*</artifactId>
-        <version>1.1.6</version>
+        <version>1.1.7</version>
     </dependency>
 </dependencies>
 ----

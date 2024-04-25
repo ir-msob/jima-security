@@ -6,7 +6,6 @@ import ir.msob.jima.core.commons.security.BaseUserService;
 import ir.msob.jima.core.commons.security.ClaimKey;
 import ir.msob.jima.core.commons.security.ClaimKeyValue;
 
-import java.io.Serializable;
 import java.util.*;
 
 
@@ -23,9 +22,10 @@ public interface BaseKeycloakProjectUserService extends BaseUserService {
             .audience(ClaimKeyValue.AUDIENCE_WEB)
             .build();
 
+    Optional<ProjectUser> SYSTEM_USER_OPTIONAL = Optional.of(SYSTEM_USER);
 
     @Override
-    default <ID extends Comparable<ID> & Serializable, USER extends BaseUser<ID>> Optional<USER> getUser(Map<String, Object> claims) {
+    default <USER extends BaseUser> Optional<USER> getUser(Map<String, Object> claims) {
         SortedSet<String> roles = new TreeSet<> ( (List<String>) ((Map<String,Map<String,List<String>>>) claims.get(ProjectClaimKey.REALM_ACCESS)).get(ProjectClaimKey.KEYCLOAK_ROLES));
         return Optional.of((USER) ProjectUser.builder()
                 .id(String.valueOf(claims.get(ClaimKey.ID)))
@@ -38,7 +38,7 @@ public interface BaseKeycloakProjectUserService extends BaseUserService {
 
 
     @Override
-    default <ID extends Comparable<ID> & Serializable, USER extends BaseUser<ID>> Optional<USER> getSystemUser() {
+    default <USER extends BaseUser> Optional<USER> getSystemUser() {
         return (Optional<USER>) Optional.of(SYSTEM_USER);
     }
 }

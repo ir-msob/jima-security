@@ -2,12 +2,9 @@ package ir.msob.jima.security.api.rsocket.oauth2;
 
 import io.rsocket.metadata.WellKnownMimeType;
 import ir.msob.jima.core.api.rsocket.commons.BaseRSocketRequesterMetadata;
-import ir.msob.jima.core.beans.properties.JimaProperties;
+import ir.msob.jima.core.commons.security.BaseTokenService;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import org.springframework.messaging.rsocket.RSocketRequester;
-import org.springframework.security.oauth2.client.AuthorizedClientServiceReactiveOAuth2AuthorizedClientManager;
-import org.springframework.security.oauth2.client.OAuth2AuthorizeRequest;
 import org.springframework.security.rsocket.metadata.BearerTokenMetadata;
 import org.springframework.stereotype.Component;
 import org.springframework.util.MimeType;
@@ -19,8 +16,7 @@ import org.springframework.util.MimeTypeUtils;
 @Component
 @RequiredArgsConstructor
 public class RSocketRequesterMetadata implements BaseRSocketRequesterMetadata {
-    private final AuthorizedClientServiceReactiveOAuth2AuthorizedClientManager authorizedClientManager;
-    private final JimaProperties jimaProperties;
+    private final BaseTokenService tokenService;
 
     /**
      * Adds metadata to the provided RSocketRequester.MetadataSpec instance.
@@ -29,25 +25,9 @@ public class RSocketRequesterMetadata implements BaseRSocketRequesterMetadata {
      */
     @Override
     public void metadata(RSocketRequester.MetadataSpec<?> metadataSpec) {
-        BearerTokenMetadata token = new BearerTokenMetadata(getTokenForClient());
+        BearerTokenMetadata token = new BearerTokenMetadata(tokenService.getToken());
         MimeType authenticationMimeType =
                 MimeTypeUtils.parseMimeType(WellKnownMimeType.MESSAGE_RSOCKET_AUTHENTICATION.getString());
         metadataSpec.metadata(token, authenticationMimeType);
-    }
-
-    /**
-     * Retrieves an OAuth2 token for the client.
-     *
-     * @return The OAuth2 token for the client.
-     */
-    @SneakyThrows
-    public String getTokenForClient() {
-        return authorizedClientManager.authorize(
-                        OAuth2AuthorizeRequest.withClientRegistrationId(jimaProperties.getSecurity().getDefaultClientRegistrationId())
-                                .principal(jimaProperties.getSecurity().getDefaultClientRegistrationId())
-                                .build())
-                .map(authorizedClient ->
-                        authorizedClient.getAccessToken().getTokenValue()
-                ).toFuture().get();
     }
 }

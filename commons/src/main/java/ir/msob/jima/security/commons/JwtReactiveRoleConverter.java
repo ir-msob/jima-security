@@ -49,7 +49,7 @@ public class JwtReactiveRoleConverter implements Converter<Jwt, Flux<GrantedAuth
         return (objectRoles instanceof List) ?
                 ((List<?>) objectRoles).stream()
                         .map(Object::toString)
-                        .collect(Collectors.toList()) :
+                        .toList():
                 List.of();
     }
 }

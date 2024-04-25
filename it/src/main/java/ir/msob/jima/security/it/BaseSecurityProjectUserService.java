@@ -12,7 +12,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 
-import java.io.Serializable;
 import java.security.Principal;
 import java.util.Map;
 import java.util.Optional;
@@ -25,7 +24,7 @@ public interface BaseSecurityProjectUserService extends BaseUserService {
 
 
     @Override
-    default <ID extends Comparable<ID> & Serializable, USER extends BaseUser<ID>, A extends Authentication> Optional<USER> getUser(A authentication) {
+    default <USER extends BaseUser, A extends Authentication> Optional<USER> getUser(A authentication) {
         if (authentication != null) {
             JwtAuthenticationToken jwtAuthenticationToken = (JwtAuthenticationToken) authentication;
             return getUser(jwtAuthenticationToken.getTokenAttributes());
@@ -36,12 +35,12 @@ public interface BaseSecurityProjectUserService extends BaseUserService {
 
     @SneakyThrows
     @Override
-    default <ID extends Comparable<ID> & Serializable, USER extends BaseUser<ID>> Optional<USER> getUser(String userInfo, Class<USER> userClass) {
+    default <USER extends BaseUser> Optional<USER> getUser(String userInfo, Class<USER> userClass) {
         return UserInfoUtil.decodeUser(getObjectMapper(), userInfo, userClass);
     }
 
     @Override
-    default <ID extends Comparable<ID> & Serializable, USER extends BaseUser<ID>, P extends Principal> Optional<USER> getUser(P principal) {
+    default <USER extends BaseUser, P extends Principal> Optional<USER> getUser(P principal) {
         if (principal != null) {
             JwtAuthenticationToken jwtAuthenticationToken = (JwtAuthenticationToken) principal;
             Jwt jwt = jwtAuthenticationToken.getToken();
@@ -53,7 +52,7 @@ public interface BaseSecurityProjectUserService extends BaseUserService {
 
 
     @Override
-    default <ID extends Comparable<ID> & Serializable, USER extends BaseUser<ID>> Optional<USER> getUser(String userInfo, Map<String, Object> claims, Class<USER> userClass) {
+    default <USER extends BaseUser> Optional<USER> getUser(String userInfo, Map<String, Object> claims, Class<USER> userClass) {
         if (claims.get(ClaimKey.SUBJECT).equals(getJimaProperties().getSecurity().getDefaultClientRegistrationId())) {
             if (Strings.isNotBlank(userInfo)) {
                 return getUser(userInfo, userClass);
@@ -66,7 +65,7 @@ public interface BaseSecurityProjectUserService extends BaseUserService {
     }
 
     @Override
-    default <ID extends Comparable<ID> & Serializable, USER extends BaseUser<ID>> Optional<USER> getUser(USER user, Map<String, Object> claims) {
+    default <USER extends BaseUser> Optional<USER> getUser(USER user, Map<String, Object> claims) {
         if (claims.get(ClaimKey.SUBJECT).equals(getJimaProperties().getSecurity().getDefaultClientRegistrationId())) {
             if (user != null) {
                 return Optional.of(user);
@@ -79,7 +78,7 @@ public interface BaseSecurityProjectUserService extends BaseUserService {
     }
 
     @Override
-    default <ID extends Comparable<ID> & Serializable, USER extends BaseUser<ID>, P extends Principal> Optional<USER> getUser(String userInfo, P principal, Class<USER> userClass) {
+    default <USER extends BaseUser, P extends Principal> Optional<USER> getUser(String userInfo, P principal, Class<USER> userClass) {
         if (principal.getName().equals(getJimaProperties().getSecurity().getDefaultClientRegistrationId())) {
             if (Strings.isNotBlank(userInfo)) {
                 return getUser(userInfo, userClass);

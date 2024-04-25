@@ -5,7 +5,7 @@
     <parent>
         <groupId>ir.msob.jima.security</groupId>
         <artifactId>security-parent</artifactId>
-        <version>1.1.6</version>
+        <version>1.1.7</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>security-commons</artifactId>
@@ -24,7 +24,7 @@
         <!-- Msob -->
         <dependency>
             <groupId>ir.msob.jima.core</groupId>
-            <artifactId>core-commons</artifactId>
+            <artifactId>core-beans</artifactId>
             <version>${core-parent.version}</version>
         </dependency>
     </dependencies>

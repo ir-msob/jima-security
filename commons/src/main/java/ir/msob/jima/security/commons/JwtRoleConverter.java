@@ -60,4 +60,5 @@ public class JwtRoleConverter implements Converter<Jwt, Collection<GrantedAuthor
         // Return an empty collection if 'roles' claim is not present or empty
         return Collections.emptyList();
     }
+
 }
