@@ -4,18 +4,15 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>ir.msob.jima.security</groupId>
-        <artifactId>security-parent</artifactId>
+        <artifactId>security-api</artifactId>
         <version>1.1.7</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>security-api</artifactId>
-    <name>api</name>
-    <description>api</description>
+    <artifactId>security-api-kafka</artifactId>
+    <name>kafka</name>
+    <description>kafka</description>
     <packaging>pom</packaging>
     <modules>
-        <module>restful</module>
-        <module>kafka</module>
-        <module>rsocket</module>
-        <module>grpc</module>
+        <module>oauth2</module>
     </modules>
 </project>

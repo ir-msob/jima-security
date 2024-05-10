@@ -17,7 +17,6 @@ import reactor.core.publisher.Flux;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Converts JWT to a Flux of GrantedAuthority based on the roles present in the JWT claims.

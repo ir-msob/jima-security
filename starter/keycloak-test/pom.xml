@@ -4,25 +4,19 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>ir.msob.jima.security</groupId>
-        <artifactId>security-api-restful</artifactId>
+        <artifactId>security-starter</artifactId>
         <version>1.1.7</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>security-api-restful-it</artifactId>
-    <name>it</name>
-    <description>it</description>
+    <artifactId>security-starter-keycloak-test</artifactId>
+    <name>keycloak-test</name>
+    <description>keycloak-test</description>
     <packaging>jar</packaging>
     <dependencies>
-        <!-- Msob -->
         <dependency>
             <groupId>ir.msob.jima.security</groupId>
-            <artifactId>security-it</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>ir.msob.jima.security</groupId>
-            <artifactId>security-api-restful-oauth2</artifactId>
-            <version>${project.parent.version}</version>
+            <artifactId>security-ral-keycloak-test</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 </project>
