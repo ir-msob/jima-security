@@ -14,6 +14,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>restful-oauth2</module>
+        <module>restful-test</module>
         <module>kafka-oauth2</module>
         <module>keycloak-test</module>
         <module>rsocket-oauth2</module>
