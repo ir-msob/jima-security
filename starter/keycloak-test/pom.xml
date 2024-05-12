@@ -11,7 +11,7 @@
     <artifactId>security-starter-keycloak-test</artifactId>
     <name>keycloak-test</name>
     <description>keycloak-test</description>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
     <dependencies>
         <dependency>
             <groupId>ir.msob.jima.security</groupId>
