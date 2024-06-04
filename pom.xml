@@ -5,12 +5,12 @@
     <parent>
         <groupId>ir.msob.jima.parent</groupId>
         <artifactId>jima-parent</artifactId>
-        <version>1.1.10</version>
+        <version>1.2.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>ir.msob.jima.security</groupId>
     <artifactId>security-parent</artifactId>
-    <version>1.1.7</version>
+    <version>${jima-security.version}</version>
     <name>security-parent</name>
     <description>security-parent</description>
     <packaging>pom</packaging>
@@ -20,8 +20,8 @@
         <developerConnection>scm:git:https://github.com/ir-msob/jima-security.git</developerConnection>
     </scm>
     <properties>
-        <!-- MSob -->
-        <core-parent.version>1.1.20</core-parent.version>
+        <!-- Jima -->
+        <jima-security.version>1.2.1</jima-security.version>
     </properties>
     <modules>
         <module>commons</module>
@@ -36,7 +36,7 @@
             <dependency>
                 <groupId>ir.msob.jima.parent</groupId>
                 <artifactId>jima-parent-bom</artifactId>
-                <version>${jima-parent.version}</version>
+                <version>${jima-commons.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

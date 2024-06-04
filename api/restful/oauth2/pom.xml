@@ -5,7 +5,7 @@
     <parent>
         <groupId>ir.msob.jima.security</groupId>
         <artifactId>security-api-restful</artifactId>
-        <version>1.1.7</version>
+        <version>${jima-security.version}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>security-api-restful-oauth2</artifactId>
@@ -22,7 +22,7 @@
         <dependency>
             <groupId>ir.msob.jima.core</groupId>
             <artifactId>core-beans</artifactId>
-            <version>${core-parent.version}</version>
+            <version>${jima-commons.version}</version>
         </dependency>
         <!-- Cloud -->
         <dependency>
