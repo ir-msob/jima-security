@@ -3,6 +3,7 @@
 
 name: Release - Publish Maven Package to Maven Centeral Repository
 on:
+  workflow_dispatch:
   release:
     types: [created]
 
