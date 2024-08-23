@@ -1,0 +1,20 @@
+# This workflow is triggered when an issue is opened.
+# It invokes a workflow to handle the opened issue.
+
+name: Issue - Opened
+
+on:
+  issues:
+    types: [ opened ] # Trigger the workflow for opened issues
+
+jobs:
+  # Job 1: Handle the opened issue
+  invoke_issue_opened:
+    permissions:
+      issues: write # Grant permission to write issues
+      pull-requests: write # Grant permission to write pull requests
+    uses: ir-msob/jima-workflow/.github/workflows/issue-opened.yml@main # Reference to the issue handling workflow
+    with:
+      default_issue_assignee: ${{ vars.DEFAULT_ISSUE_ASSIGNEE }} # Default assignee for the issue
+    secrets:
+      github_token: ${{ secrets.GITHUB_TOKEN }} # GitHub token for authentication

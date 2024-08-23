@@ -1,0 +1,26 @@
+# This workflow is triggered on pushes to the main branch.
+# It invokes a workflow for SonarQube analysis for the pushed code.
+
+name: Push - main
+
+on:
+  push:
+    branches: [ "main" ] # Trigger the workflow for pushes to the main branch
+
+jobs:
+  # Job 1: Handle the push event for the main branch
+  invoke_push_main:
+    permissions:
+      contents: read # Grant permission to read repository contents
+      packages: write # Grant permission to write to packages
+    uses: ir-msob/jima-workflow/.github/workflows/push-main.yml@main # Reference to the push handling workflow
+    with:
+      sonar_host_url: ${{ vars.SONAR_HOST_URL }} # SonarQube host URL
+      sonar_java_binaries: ${{ vars.SONAR_JAVA_BINARIES }} # Paths to Java binaries for analysis
+      sonar_java_libraries: ${{ vars.SONAR_JAVA_LIBRARIES }} # Paths to Java libraries for analysis
+      sonar_organization: ${{ vars.SONAR_ORGANIZATION }} # SonarQube organization
+      sonar_project_key: ${{ vars.SONAR_PROJECT_KEY }} # SonarQube project key
+      sonar_coverage_jacoco_xml_report_paths: ${{ vars.SONAR_COVERAGE_JACOCO_XML_REPORT_PATHS }} # JaCoCo coverage report paths
+      sonar_maven_plugin_version: ${{ vars.SONAR_MAVEN_PLUGIN_VERSION }} # Sonar Maven plugin version
+    secrets:
+      sonar_token: ${{ secrets.SONAR_TOKEN }} # SonarQube token for authentication

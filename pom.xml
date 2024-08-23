@@ -6,7 +6,6 @@
     <groupId>ir.msob.jima.parent</groupId>
     <artifactId>jima-parent</artifactId>
     <version>1.2.0</version>
-    <relativePath></relativePath>
   </parent>
   <groupId>ir.msob.jima.security</groupId>
   <artifactId>security-parent</artifactId>

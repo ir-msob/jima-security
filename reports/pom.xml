@@ -14,10 +14,7 @@
     <packaging>pom</packaging>
     <profiles>
         <profile>
-            <id>dev</id>
-            <properties>
-                <spring.profiles.active>dev</spring.profiles.active>
-            </properties>
+            <id>report</id>
             <dependencies>
                 <dependency>
                     <groupId>ir.msob.jima.security</groupId>
