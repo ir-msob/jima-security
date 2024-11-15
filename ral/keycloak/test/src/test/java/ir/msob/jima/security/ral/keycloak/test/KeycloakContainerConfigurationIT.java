@@ -20,13 +20,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @CommonsLog
 class KeycloakContainerConfigurationIT {
 
-    @Value("${spring.security.oauth2.resource-server.jwt.issuer-uri}")
-    private String configUrl;
-
     @Autowired
     KeycloakContainer container;
     @Autowired
     JimaProperties jimaProperties;
+    @Value("${spring.security.oauth2.resource-server.jwt.issuer-uri}")
+    private String configUrl;
 
     @Test
     @DisplayName("Container is running after initialization")

@@ -5,7 +5,7 @@ name: Release - created
 
 on:
   release:
-    types: [created] # Trigger the workflow when a release is created
+    types: [ created ] # Trigger the workflow when a release is created
 
 jobs:
   # Job 1: Handle the creation of the release

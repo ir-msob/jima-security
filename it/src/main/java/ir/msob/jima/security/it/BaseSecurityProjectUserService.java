@@ -14,7 +14,6 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 
 import java.security.Principal;
 import java.util.Map;
-import java.util.Optional;
 
 
 public interface BaseSecurityProjectUserService extends BaseUserService {
@@ -24,40 +23,40 @@ public interface BaseSecurityProjectUserService extends BaseUserService {
 
 
     @Override
-    default <USER extends BaseUser, A extends Authentication> Optional<USER> getUser(A authentication) {
+    default <USER extends BaseUser, A extends Authentication> USER getUser(A authentication) {
         if (authentication != null) {
             JwtAuthenticationToken jwtAuthenticationToken = (JwtAuthenticationToken) authentication;
             return getUser(jwtAuthenticationToken.getTokenAttributes());
         }
-        return Optional.empty();
+        throw new IllegalArgumentException("Authentication cannot be null. Please provide a valid authentication object.");
     }
 
 
     @SneakyThrows
     @Override
-    default <USER extends BaseUser> Optional<USER> getUser(String userInfo, Class<USER> userClass) {
+    default <USER extends BaseUser> USER getUser(String userInfo, Class<USER> userClass) {
         return UserInfoUtil.decodeUser(getObjectMapper(), userInfo, userClass);
     }
 
     @Override
-    default <USER extends BaseUser, P extends Principal> Optional<USER> getUser(P principal) {
+    default <USER extends BaseUser, P extends Principal> USER getUser(P principal) {
         if (principal != null) {
             JwtAuthenticationToken jwtAuthenticationToken = (JwtAuthenticationToken) principal;
             Jwt jwt = jwtAuthenticationToken.getToken();
 
             return getUser(jwt.getClaims());
         }
-        return Optional.empty();
+        throw new IllegalArgumentException("Authentication cannot be null. Please provide a valid authentication object.");
     }
 
 
     @Override
-    default <USER extends BaseUser> Optional<USER> getUser(String userInfo, Map<String, Object> claims, Class<USER> userClass) {
+    default <USER extends BaseUser> USER getUser(String userInfo, Map<String, Object> claims, Class<USER> userClass) {
         if (claims.get(ClaimKey.SUBJECT).equals(getJimaProperties().getSecurity().getDefaultClientRegistrationId())) {
             if (Strings.isNotBlank(userInfo)) {
                 return getUser(userInfo, userClass);
             } else {
-                return Optional.empty();
+                throw new IllegalArgumentException("Authentication cannot be null. Please provide a valid authentication object.");
             }
         } else {
             return getUser(claims);
@@ -65,12 +64,12 @@ public interface BaseSecurityProjectUserService extends BaseUserService {
     }
 
     @Override
-    default <USER extends BaseUser> Optional<USER> getUser(USER user, Map<String, Object> claims) {
+    default <USER extends BaseUser> USER getUser(USER user, Map<String, Object> claims) {
         if (claims.get(ClaimKey.SUBJECT).equals(getJimaProperties().getSecurity().getDefaultClientRegistrationId())) {
             if (user != null) {
-                return Optional.of(user);
+                return user;
             } else {
-                return Optional.empty();
+                throw new IllegalArgumentException("Authentication cannot be null. Please provide a valid authentication object.");
             }
         } else {
             return getUser(claims);
@@ -78,17 +77,15 @@ public interface BaseSecurityProjectUserService extends BaseUserService {
     }
 
     @Override
-    default <USER extends BaseUser, P extends Principal> Optional<USER> getUser(String userInfo, P principal, Class<USER> userClass) {
+    default <USER extends BaseUser, P extends Principal> USER getUser(String userInfo, P principal, Class<USER> userClass) {
         if (principal.getName().equals(getJimaProperties().getSecurity().getDefaultClientRegistrationId())) {
             if (Strings.isNotBlank(userInfo)) {
                 return getUser(userInfo, userClass);
             } else {
-                return Optional.empty();
+                throw new IllegalArgumentException("Authentication cannot be null. Please provide a valid authentication object.");
             }
         } else {
             return getUser(principal);
         }
     }
-
-
 }

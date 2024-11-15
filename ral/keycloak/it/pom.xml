@@ -16,7 +16,7 @@
         <!-- MSob -->
         <dependency>
             <groupId>ir.msob.jima.core</groupId>
-            <artifactId>core-commons</artifactId>
+            <artifactId>core-ral-mongo-it</artifactId>
             <version>${jima-commons.version}</version>
         </dependency>
     </dependencies>

@@ -5,6 +5,7 @@ import ir.msob.jima.core.commons.security.BaseUser;
 import ir.msob.jima.core.commons.security.BaseUserService;
 import ir.msob.jima.core.commons.security.ClaimKey;
 import ir.msob.jima.core.commons.security.ClaimKeyValue;
+import ir.msob.jima.core.ral.mongo.it.security.ProjectUser;
 
 import java.util.*;
 
@@ -22,23 +23,21 @@ public interface BaseKeycloakProjectUserService extends BaseUserService {
             .audience(ClaimKeyValue.AUDIENCE_WEB)
             .build();
 
-    Optional<ProjectUser> SYSTEM_USER_OPTIONAL = Optional.of(SYSTEM_USER);
-
     @Override
-    default <USER extends BaseUser> Optional<USER> getUser(Map<String, Object> claims) {
-        SortedSet<String> roles = new TreeSet<> ( (List<String>) ((Map<String,Map<String,List<String>>>) claims.get(ProjectClaimKey.REALM_ACCESS)).get(ProjectClaimKey.KEYCLOAK_ROLES));
-        return Optional.of((USER) ProjectUser.builder()
+    default <USER extends BaseUser> USER getUser(Map<String, Object> claims) {
+        SortedSet<String> roles = new TreeSet<>((List<String>) ((Map<String, Map<String, List<String>>>) claims.get(ProjectClaimKey.REALM_ACCESS)).get(ProjectClaimKey.KEYCLOAK_ROLES));
+        return (USER) ProjectUser.builder()
                 .id(String.valueOf(claims.get(ClaimKey.ID)))
                 .sessionId(String.valueOf(claims.get(ClaimKey.SESSION_ID)))
                 .username(String.valueOf(claims.get(ClaimKey.SUBJECT)))
                 .audience(String.valueOf(claims.get(ClaimKey.AUDIENCE)))
                 .roles(roles)
-                .build());
+                .build();
     }
 
 
     @Override
-    default <USER extends BaseUser> Optional<USER> getSystemUser() {
-        return (Optional<USER>) Optional.of(SYSTEM_USER);
+    default <USER extends BaseUser> USER getSystemUser() {
+        return (USER) SYSTEM_USER;
     }
 }

@@ -17,6 +17,7 @@ import org.springframework.security.oauth2.jwt.ReactiveJwtDecoders;
  * Include this configuration class in your application's configuration to enable
  * JWT authentication and authorization in the context of an RSocket-based API.
  * <p>
+ *
  * @since 0.1.0
  */
 @Configuration
