@@ -8,7 +8,7 @@
  */
 package ir.msob.jima.security.commons;
 
-import ir.msob.jima.core.commons.security.ClaimKey;
+import ir.msob.jima.core.commons.security.BaseClaimKey;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -44,7 +44,7 @@ public class JwtReactiveRoleConverter implements Converter<Jwt, Flux<GrantedAuth
      * @return A List of strings representing the roles extracted from the JWT claims.
      */
     private List<String> extractRoles(Jwt jwt) {
-        Object objectRoles = jwt.getClaims().getOrDefault(ClaimKey.ROLES, new ArrayList<>());
+        Object objectRoles = jwt.getClaims().getOrDefault(BaseClaimKey.ROLES, new ArrayList<>());
         return (objectRoles instanceof List) ?
                 ((List<?>) objectRoles).stream()
                         .map(Object::toString)

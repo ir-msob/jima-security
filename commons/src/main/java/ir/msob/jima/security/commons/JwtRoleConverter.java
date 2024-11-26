@@ -1,6 +1,6 @@
 package ir.msob.jima.security.commons;
 
-import ir.msob.jima.core.commons.security.ClaimKey;
+import ir.msob.jima.core.commons.security.BaseClaimKey;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -47,7 +47,7 @@ public class JwtRoleConverter implements Converter<Jwt, Collection<GrantedAuthor
     @Override
     public Collection<GrantedAuthority> convert(Jwt jwt) {
         // Extract 'roles' claim from JWT claims
-        Object objectRoles = jwt.getClaims().getOrDefault(ClaimKey.ROLES, Collections.emptyList());
+        Object objectRoles = jwt.getClaims().getOrDefault(BaseClaimKey.ROLES, Collections.emptyList());
 
         // Check if 'roles' claim is a non-empty list
         if (objectRoles instanceof List roles && !roles.isEmpty()) {

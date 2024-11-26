@@ -11,7 +11,7 @@
     <artifactId>security-starter-rsocket-oauth2</artifactId>
     <name>rsocket-oauth2</name>
     <description>rsocket-oauth2</description>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
     <dependencies>
         <dependency>
             <groupId>ir.msob.jima.security</groupId>

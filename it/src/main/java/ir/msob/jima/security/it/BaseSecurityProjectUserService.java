@@ -2,9 +2,9 @@ package ir.msob.jima.security.it;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.msob.jima.core.beans.properties.JimaProperties;
+import ir.msob.jima.core.commons.security.BaseClaimKey;
 import ir.msob.jima.core.commons.security.BaseUser;
 import ir.msob.jima.core.commons.security.BaseUserService;
-import ir.msob.jima.core.commons.security.ClaimKey;
 import ir.msob.jima.core.commons.security.UserInfoUtil;
 import lombok.SneakyThrows;
 import org.apache.logging.log4j.util.Strings;
@@ -52,7 +52,7 @@ public interface BaseSecurityProjectUserService extends BaseUserService {
 
     @Override
     default <USER extends BaseUser> USER getUser(String userInfo, Map<String, Object> claims, Class<USER> userClass) {
-        if (claims.get(ClaimKey.SUBJECT).equals(getJimaProperties().getSecurity().getDefaultClientRegistrationId())) {
+        if (claims.get(BaseClaimKey.SUBJECT).equals(getJimaProperties().getSecurity().getDefaultClientRegistrationId())) {
             if (Strings.isNotBlank(userInfo)) {
                 return getUser(userInfo, userClass);
             } else {
@@ -65,7 +65,7 @@ public interface BaseSecurityProjectUserService extends BaseUserService {
 
     @Override
     default <USER extends BaseUser> USER getUser(USER user, Map<String, Object> claims) {
-        if (claims.get(ClaimKey.SUBJECT).equals(getJimaProperties().getSecurity().getDefaultClientRegistrationId())) {
+        if (claims.get(BaseClaimKey.SUBJECT).equals(getJimaProperties().getSecurity().getDefaultClientRegistrationId())) {
             if (user != null) {
                 return user;
             } else {

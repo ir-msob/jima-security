@@ -1,10 +1,10 @@
 package ir.msob.jima.security.ral.keycloak.it.security;
 
 import com.google.common.collect.Sets;
+import ir.msob.jima.core.commons.security.BaseClaimKey;
+import ir.msob.jima.core.commons.security.BaseClaimKeyValue;
 import ir.msob.jima.core.commons.security.BaseUser;
 import ir.msob.jima.core.commons.security.BaseUserService;
-import ir.msob.jima.core.commons.security.ClaimKey;
-import ir.msob.jima.core.commons.security.ClaimKeyValue;
 import ir.msob.jima.core.ral.mongo.it.security.ProjectUser;
 
 import java.util.*;
@@ -20,17 +20,17 @@ public interface BaseKeycloakProjectUserService extends BaseUserService {
             .sessionId("00000000-0000-0000-0000-000000000000")
             .username("system")
             .roles(Sets.newTreeSet(Collections.singleton(Roles.ADMIN)))
-            .audience(ClaimKeyValue.AUDIENCE_WEB)
+            .audience(BaseClaimKeyValue.AUDIENCE_WEB)
             .build();
 
     @Override
     default <USER extends BaseUser> USER getUser(Map<String, Object> claims) {
         SortedSet<String> roles = new TreeSet<>((List<String>) ((Map<String, Map<String, List<String>>>) claims.get(ProjectClaimKey.REALM_ACCESS)).get(ProjectClaimKey.KEYCLOAK_ROLES));
         return (USER) ProjectUser.builder()
-                .id(String.valueOf(claims.get(ClaimKey.ID)))
-                .sessionId(String.valueOf(claims.get(ClaimKey.SESSION_ID)))
-                .username(String.valueOf(claims.get(ClaimKey.SUBJECT)))
-                .audience(String.valueOf(claims.get(ClaimKey.AUDIENCE)))
+                .id(String.valueOf(claims.get(BaseClaimKey.ID)))
+                .sessionId(String.valueOf(claims.get(BaseClaimKey.SESSION_ID)))
+                .username(String.valueOf(claims.get(BaseClaimKey.SUBJECT)))
+                .audience(String.valueOf(claims.get(BaseClaimKey.AUDIENCE)))
                 .roles(roles)
                 .build();
     }

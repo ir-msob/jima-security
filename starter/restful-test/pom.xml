@@ -11,7 +11,7 @@
     <artifactId>security-starter-restful-test</artifactId>
     <name>restful-test</name>
     <description>restful-test</description>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
     <dependencies>
         <dependency>
             <groupId>ir.msob.jima.security</groupId>
