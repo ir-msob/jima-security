@@ -8,7 +8,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.DynamicPropertyRegistrar;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -26,6 +28,13 @@ class KeycloakContainerConfigurationIT {
     JimaProperties jimaProperties;
     @Value("${spring.security.oauth2.resource-server.jwt.issuer-uri}")
     private String configUrl;
+
+    @Bean
+    public DynamicPropertyRegistrar dynamicPropertyRegistrar(KeycloakContainer kafkaContainer, JimaProperties jimaProperties) {
+        return registry -> {
+            KeycloakContainerConfiguration.registry(registry, kafkaContainer, jimaProperties);
+        };
+    }
 
     @Test
     @DisplayName("Container is running after initialization")

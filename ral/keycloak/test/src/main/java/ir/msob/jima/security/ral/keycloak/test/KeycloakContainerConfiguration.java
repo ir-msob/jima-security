@@ -15,18 +15,22 @@ import org.springframework.util.StringUtils;
 @TestConfiguration(proxyBeanMethods = false)
 public class KeycloakContainerConfiguration {
 
+    public static void registry(DynamicPropertyRegistry registry, KeycloakContainer container, JimaProperties jimaProperties) {
+        registry.add("spring.security.oauth2.resource-server.jwt.issuer-uri",
+                () -> container.getAuthServerUrl() + "/realms/" + jimaProperties.getTestContainer().getKeycloak().getRealm());
+    }
+
     /**
      * This method creates a KeycloakContainer bean for testing purposes.
      * It uses the DynamicPropertyRegistry to dynamically register properties for the Keycloak container.
      * The property includes the URI for the Keycloak container.
      * The JimaProperties object is used to get the Docker image name for the Keycloak container.
      *
-     * @param registry       The DynamicPropertyRegistry used to dynamically register properties for the Keycloak container.
      * @param jimaProperties The JimaProperties object used to get the Docker image name for the Keycloak container.
      * @return The created KeycloakContainer bean.
      */
     @Bean
-    public KeycloakContainer keycloakContainer(DynamicPropertyRegistry registry, JimaProperties jimaProperties) {
+    public KeycloakContainer keycloakContainer(JimaProperties jimaProperties) {
         String keycloakImage = StringUtils.hasText(jimaProperties.getTestContainer().getKeycloak().getImage()) ?
                 jimaProperties.getTestContainer().getKeycloak().getImage() : null;
 
@@ -36,10 +40,6 @@ public class KeycloakContainerConfiguration {
         container.withReuse(jimaProperties.getTestContainer().getKeycloak().isReuse());
 
         container.withRealmImportFile(jimaProperties.getTestContainer().getKeycloak().getRealmJsonFile());
-
-        registry.add("spring.security.oauth2.resource-server.jwt.issuer-uri",
-                () -> container.getAuthServerUrl() + "/realms/" + jimaProperties.getTestContainer().getKeycloak().getRealm());
-
         return container;
     }
 }
