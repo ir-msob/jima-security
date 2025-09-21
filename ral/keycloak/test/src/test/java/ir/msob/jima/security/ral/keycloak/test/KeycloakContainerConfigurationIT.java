@@ -29,13 +29,6 @@ class KeycloakContainerConfigurationIT {
     @Value("${spring.security.oauth2.resource-server.jwt.issuer-uri}")
     private String configUrl;
 
-    @Bean
-    public DynamicPropertyRegistrar dynamicPropertyRegistrar(KeycloakContainer kafkaContainer, JimaProperties jimaProperties) {
-        return registry -> {
-            KeycloakContainerConfiguration.registry(registry, kafkaContainer, jimaProperties);
-        };
-    }
-
     @Test
     @DisplayName("Container is running after initialization")
     void containerIsRunningAfterInitialization() {
