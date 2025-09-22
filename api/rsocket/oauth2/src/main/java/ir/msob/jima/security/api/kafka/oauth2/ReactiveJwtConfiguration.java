@@ -35,7 +35,7 @@ public class ReactiveJwtConfiguration {
      * @return An instance of ReactiveJwtDecoder configured with the issuer URI.
      */
     @Bean
-    public ReactiveJwtDecoder jwtDecoder() {
+    public ReactiveJwtDecoder reactiveJwtDecoder() {
         return ReactiveJwtDecoders
                 .fromIssuerLocation(issuerUri);
     }

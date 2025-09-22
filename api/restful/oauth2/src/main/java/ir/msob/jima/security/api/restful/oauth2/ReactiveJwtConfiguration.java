@@ -1,4 +1,4 @@
-package ir.msob.jima.security.api.kafka.oauth2;
+package ir.msob.jima.security.api.restful.oauth2;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
