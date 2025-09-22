@@ -1,0 +1,22 @@
+spring:
+  security:
+    oauth2:
+      resource-server:
+        jwt:
+          issuer-uri: http://localhost:8004
+      client:
+        provider:
+          service-client:
+            issuer-uri: ${spring.security.oauth2.resource-server.jwt.issuer-uri}
+        registration:
+          service-client:
+            client-name: service-client
+            client-id: service-client
+            client-secret: service-client-secret
+            authorization-grant-type: client_credentials
+            client-authentication-method: client_secret_basic
+            scope:
+              - openid
+
+keycloak:
+  enabled: true
