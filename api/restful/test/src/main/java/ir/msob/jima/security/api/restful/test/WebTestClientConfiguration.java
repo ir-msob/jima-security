@@ -3,6 +3,7 @@ package ir.msob.jima.security.api.restful.test;
 import ir.msob.jima.core.beans.properties.JimaProperties;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.apachecommons.CommonsLog;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -58,13 +59,15 @@ public class WebTestClientConfiguration {
      */
     @Bean
     @Primary
-    public WebTestClient.Builder webTestClientBuilder(AuthorizedClientServiceReactiveOAuth2AuthorizedClientManager authorizedClientManager) {
+    public WebTestClient.Builder webTestClientBuilder(AuthorizedClientServiceReactiveOAuth2AuthorizedClientManager authorizedClientManager, ApplicationContext applicationContext) {
         // Create a ServerOAuth2AuthorizedClientExchangeFilterFunction to handle OAuth2 integration.
         ServerOAuth2AuthorizedClientExchangeFilterFunction oauth = new ServerOAuth2AuthorizedClientExchangeFilterFunction(authorizedClientManager);
         oauth.setDefaultOAuth2AuthorizedClient(true);
         oauth.setDefaultClientRegistrationId(jimaProperties.getSecurity().getDefaultClientRegistrationId());
 
-        return WebTestClient.bindToServer()
+        return WebTestClient
+                .bindToApplicationContext(applicationContext)
+                .configureClient()
                 .filter(oauth)  // Apply OAuth2 client integration.
                 .filters(exchangeFilterFunctions -> exchangeFilterFunctions.add(logRequest()));  // Log HTTP requests.
     }
