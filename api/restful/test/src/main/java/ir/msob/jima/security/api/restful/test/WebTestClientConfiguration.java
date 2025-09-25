@@ -34,7 +34,10 @@ public class WebTestClientConfiguration {
      */
     private static ExchangeFilterFunction logRequest() {
         return ExchangeFilterFunction.ofRequestProcessor(clientRequest -> {
-            log.info("Request: " + clientRequest.method() + " " + clientRequest.url());
+            log.info("=== REQUEST ===");
+            log.info("Method: " + clientRequest.method());
+            log.info("URL: " + clientRequest.url());
+            log.info("Headers: " + clientRequest.headers());
             return Mono.just(clientRequest);
         });
     }
@@ -57,18 +60,27 @@ public class WebTestClientConfiguration {
      * @param authorizedClientManager The manager for OAuth2 authorized clients.
      * @return The WebTestClient.Builder instance.
      */
+    /**
+     * Expose the builder. Do NOT create and expose a WebTestClient bean yourself —
+     * let Spring Boot create it so it's bound to the random port/test context.
+     */
     @Bean
     @Primary
-    public WebTestClient.Builder webTestClientBuilder(AuthorizedClientServiceReactiveOAuth2AuthorizedClientManager authorizedClientManager, ApplicationContext applicationContext) {
-        // Create a ServerOAuth2AuthorizedClientExchangeFilterFunction to handle OAuth2 integration.
-        ServerOAuth2AuthorizedClientExchangeFilterFunction oauth = new ServerOAuth2AuthorizedClientExchangeFilterFunction(authorizedClientManager);
+    public WebTestClient.Builder webTestClientBuilder(
+            AuthorizedClientServiceReactiveOAuth2AuthorizedClientManager authorizedClientManager,
+            ApplicationContext applicationContext) {
+
+        ServerOAuth2AuthorizedClientExchangeFilterFunction oauth =
+                new ServerOAuth2AuthorizedClientExchangeFilterFunction(authorizedClientManager);
         oauth.setDefaultOAuth2AuthorizedClient(true);
         oauth.setDefaultClientRegistrationId(jimaProperties.getSecurity().getDefaultClientRegistrationId());
 
+        // bind builder to application context so Spring can produce a WebTestClient bound
+        // to the app's random port and use that across tests.
         return WebTestClient
                 .bindToApplicationContext(applicationContext)
                 .configureClient()
-                .filter(oauth)  // Apply OAuth2 client integration.
-                .filters(exchangeFilterFunctions -> exchangeFilterFunctions.add(logRequest()));  // Log HTTP requests.
+                .filter(oauth)
+                .filters(exchangeFilterFunctions -> exchangeFilterFunctions.add(logRequest()));
     }
 }
