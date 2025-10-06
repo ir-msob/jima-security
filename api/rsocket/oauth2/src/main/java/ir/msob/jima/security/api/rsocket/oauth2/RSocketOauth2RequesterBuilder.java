@@ -1,4 +1,4 @@
-package ir.msob.jima.security.api.kafka.oauth2;
+package ir.msob.jima.security.api.rsocket.oauth2;
 
 import io.rsocket.SocketAcceptor;
 import ir.msob.jima.core.api.rsocket.commons.BaseRSocketRequesterBuilder;

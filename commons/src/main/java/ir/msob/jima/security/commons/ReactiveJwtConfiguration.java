@@ -1,10 +1,10 @@
-package ir.msob.jima.security.api.grpc.oauth2;
+package ir.msob.jima.security.commons;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.oauth2.jwt.JwtDecoder;
-import org.springframework.security.oauth2.jwt.JwtDecoders;
+import org.springframework.security.oauth2.jwt.ReactiveJwtDecoder;
+import org.springframework.security.oauth2.jwt.ReactiveJwtDecoders;
 
 /**
  * Configuration class for JWT (JSON Web Token) in the context of OAuth2 security
@@ -21,7 +21,7 @@ import org.springframework.security.oauth2.jwt.JwtDecoders;
  * @since 0.1.0
  */
 @Configuration
-public class JwtConfiguration {
+public class ReactiveJwtConfiguration {
 
     /**
      * Configuration property representing the issuer URI of the JWT.
@@ -30,13 +30,13 @@ public class JwtConfiguration {
     private String issuerUri;
 
     /**
-     * Bean definition for JwtDecoder.
+     * Bean definition for ReactiveJwtDecoder.
      *
-     * @return An instance of JwtDecoder configured with the issuer URI.
+     * @return An instance of ReactiveJwtDecoder configured with the issuer URI.
      */
     @Bean
-    public JwtDecoder jwtDecoder() {
-        return JwtDecoders
+    public ReactiveJwtDecoder reactiveJwtDecoder() {
+        return ReactiveJwtDecoders
                 .fromIssuerLocation(issuerUri);
     }
 }

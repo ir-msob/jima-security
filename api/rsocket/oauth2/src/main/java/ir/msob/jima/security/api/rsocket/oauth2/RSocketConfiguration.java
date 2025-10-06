@@ -1,4 +1,4 @@
-package ir.msob.jima.security.api.kafka.oauth2;
+package ir.msob.jima.security.api.rsocket.oauth2;
 
 import ir.msob.jima.security.commons.JwtRoleConverter;
 import org.springframework.context.annotation.Bean;
