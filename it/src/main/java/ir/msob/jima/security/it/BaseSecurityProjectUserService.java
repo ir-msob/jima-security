@@ -14,6 +14,7 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 
 import java.security.Principal;
 import java.util.Map;
+import java.util.Objects;
 
 
 public interface BaseSecurityProjectUserService extends BaseUserService {
@@ -78,7 +79,10 @@ public interface BaseSecurityProjectUserService extends BaseUserService {
 
     @Override
     default <USER extends BaseUser, P extends Principal> USER getUser(String userInfo, P principal, Class<USER> userClass) {
-        if (principal.getName().equals(getJimaProperties().getSecurity().getDefaultClientRegistrationId())) {
+        if (principal != null
+                && Strings.isNotBlank(principal.getName())
+                && Strings.isNotBlank(getJimaProperties().getSecurity().getDefaultClientRegistrationId())
+                && Objects.equals(principal.getName(), getJimaProperties().getSecurity().getDefaultClientRegistrationId())) {
             if (Strings.isNotBlank(userInfo)) {
                 return getUser(userInfo, userClass);
             } else {
