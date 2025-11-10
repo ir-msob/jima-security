@@ -4,14 +4,23 @@ import ir.msob.jima.core.beans.properties.JimaProperties;
 import ir.msob.jima.core.commons.security.BaseTokenService;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
-import org.springframework.security.oauth2.client.AuthorizedClientServiceReactiveOAuth2AuthorizedClientManager;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
+import org.springframework.security.oauth2.client.AuthorizedClientServiceOAuth2AuthorizedClientManager;
 import org.springframework.security.oauth2.client.OAuth2AuthorizeRequest;
 import org.springframework.stereotype.Service;
 
+/**
+ * This TokenService class is responsible for retrieving OAuth2 tokens
+ * for non-reactive (Servlet-based) applications.
+ * <p>
+ * Author: Yaqub Abdi
+ */
 @Service
 @RequiredArgsConstructor
+@ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
 public class TokenService implements BaseTokenService {
-    private final AuthorizedClientServiceReactiveOAuth2AuthorizedClientManager authorizedClientManager;
+
+    private final AuthorizedClientServiceOAuth2AuthorizedClientManager authorizedClientManager;
     private final JimaProperties jimaProperties;
 
     /**
@@ -22,12 +31,18 @@ public class TokenService implements BaseTokenService {
     @SneakyThrows
     @Override
     public String getToken() {
-        return authorizedClientManager.authorize(
-                        OAuth2AuthorizeRequest.withClientRegistrationId(jimaProperties.getSecurity().getDefaultClientRegistrationId())
-                                .principal(jimaProperties.getSecurity().getDefaultClientRegistrationId())
-                                .build())
-                .map(authorizedClient ->
-                        authorizedClient.getAccessToken().getTokenValue()
-                ).toFuture().get();
+        var authorizeRequest = OAuth2AuthorizeRequest.withClientRegistrationId(
+                        jimaProperties.getSecurity().getDefaultClientRegistrationId())
+                .principal(jimaProperties.getSecurity().getDefaultClientRegistrationId())
+                .build();
+
+        var authorizedClient = authorizedClientManager.authorize(authorizeRequest);
+
+        if (authorizedClient == null || authorizedClient.getAccessToken() == null) {
+            throw new IllegalStateException("Failed to obtain access token for client: "
+                    + jimaProperties.getSecurity().getDefaultClientRegistrationId());
+        }
+
+        return authorizedClient.getAccessToken().getTokenValue();
     }
 }
