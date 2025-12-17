@@ -8,17 +8,12 @@
         <version>${jima-security.version}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>security-api-restful-test</artifactId>
-    <name>test</name>
-    <description>test</description>
+    <artifactId>security-api-restful-jwt-test</artifactId>
+    <name>jwt-test</name>
+    <description>jwt-test</description>
     <packaging>jar</packaging>
     <dependencies>
         <!-- Msob -->
-        <dependency>
-            <groupId>ir.msob.jima.security</groupId>
-            <artifactId>security-commons</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
         <dependency>
             <groupId>ir.msob.jima.core</groupId>
             <artifactId>core-beans</artifactId>

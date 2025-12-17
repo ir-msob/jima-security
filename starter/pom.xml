@@ -13,8 +13,10 @@
     <description>starter</description>
     <packaging>pom</packaging>
     <modules>
+        <module>restful-jwt</module>
+        <module>restful-jwt-test</module>
         <module>restful-oauth2</module>
-        <module>restful-test</module>
+        <module>restful-oauth2-test</module>
         <module>kafka-oauth2</module>
         <module>keycloak-test</module>
         <module>rsocket-oauth2</module>

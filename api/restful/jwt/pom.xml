@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>ir.msob.jima.security</groupId>
+        <artifactId>security-api-restful</artifactId>
+        <version>${jima-security.version}</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <artifactId>security-api-restful-jwt</artifactId>
+    <name>jwt</name>
+    <description>jwt</description>
+    <packaging>jar</packaging>
+    <dependencies>
+        <!-- Msob -->
+        <dependency>
+            <groupId>ir.msob.jima.core</groupId>
+            <artifactId>core-beans</artifactId>
+            <version>${jima-commons.version}</version>
+        </dependency>
+        <!-- Cloud -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-loadbalancer</artifactId>
+        </dependency>
+        <!-- Web -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webflux</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+    </dependencies>
+</project>

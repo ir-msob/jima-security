@@ -13,8 +13,10 @@
     <description>restful</description>
     <packaging>pom</packaging>
     <modules>
+        <module>jwt</module>
+        <module>jwt-test</module>
         <module>oauth2</module>
-        <module>test</module>
+        <module>oauth2-test</module>
         <module>it</module>
     </modules>
 </project>

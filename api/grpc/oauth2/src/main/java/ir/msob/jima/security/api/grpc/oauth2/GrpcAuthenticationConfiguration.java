@@ -32,10 +32,10 @@ public class GrpcAuthenticationConfiguration {
      * using the {@link JwtRoleConverter}, and creates a fully authenticated {@link JwtAuthenticationToken}.
      * </p>
      *
-     * @param jwtDecoder the JWT decoder used to validate and decode tokens
+     * @param jwtDecoder       the JWT decoder used to validate and decode tokens
      * @param jwtRoleConverter the converter used to extract roles from JWT claims
      * @return a configured {@link AuthenticationReader} instance
-     * @throws JwtException if the token is invalid, expired, or malformed
+     * @throws JwtException             if the token is invalid, expired, or malformed
      * @throws IllegalArgumentException if the token is null or empty
      */
     @Bean

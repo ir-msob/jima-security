@@ -5,7 +5,7 @@ import ir.msob.jima.core.commons.security.BaseClaimKey;
 import ir.msob.jima.core.commons.security.BaseClaimKeyValue;
 import ir.msob.jima.core.commons.security.BaseUser;
 import ir.msob.jima.core.commons.security.BaseUserService;
-import ir.msob.jima.core.ral.mongo.it.security.ProjectUser;
+import ir.msob.jima.core.it.security.ProjectUser;
 
 import java.util.*;
 

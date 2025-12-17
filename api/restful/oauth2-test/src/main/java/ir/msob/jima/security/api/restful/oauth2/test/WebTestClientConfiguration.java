@@ -1,4 +1,4 @@
-package ir.msob.jima.security.api.restful.test;
+package ir.msob.jima.security.api.restful.oauth2.test;
 
 import ir.msob.jima.core.beans.properties.JimaProperties;
 import lombok.RequiredArgsConstructor;
