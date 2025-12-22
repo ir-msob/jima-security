@@ -1,17 +1,17 @@
 package ir.msob.jima.security.commons;
 
 import ir.msob.jima.core.beans.properties.JimaProperties;
+import ir.msob.jima.core.commons.condition.ConditionalOnReactiveOrNone;
 import ir.msob.jima.core.commons.security.BaseTokenService;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.security.oauth2.client.AuthorizedClientServiceReactiveOAuth2AuthorizedClientManager;
 import org.springframework.security.oauth2.client.OAuth2AuthorizeRequest;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-@ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.REACTIVE)
+@ConditionalOnReactiveOrNone
 public class TokenReactiveService implements BaseTokenService {
     private final AuthorizedClientServiceReactiveOAuth2AuthorizedClientManager authorizedClientManager;
     private final JimaProperties jimaProperties;

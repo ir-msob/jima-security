@@ -22,7 +22,7 @@
         <dependency>
             <groupId>ir.msob.jima.core</groupId>
             <artifactId>core-beans</artifactId>
-            <version>${jima-commons.version}</version>
+            <version>${jima-core.version}</version>
         </dependency>
         <!-- Cloud -->
         <dependency>
@@ -38,6 +38,7 @@
             <groupId>io.rest-assured</groupId>
             <artifactId>spring-web-test-client</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>

@@ -1,7 +1,7 @@
 package ir.msob.jima.security.commons;
 
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
+import ir.msob.jima.core.commons.condition.ConditionalOnReactiveOrNone;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -27,7 +27,7 @@ public class JwtRoleConvertorConfiguration {
      * @return JwtReactiveRoleConverter bean used for converting JWTs to a Flux of GrantedAuthority.
      */
     @Bean
-    @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.REACTIVE)
+    @ConditionalOnReactiveOrNone
     JwtReactiveRoleConverter jwtReactiveRoleConverter() {
         return new JwtReactiveRoleConverter();
     }

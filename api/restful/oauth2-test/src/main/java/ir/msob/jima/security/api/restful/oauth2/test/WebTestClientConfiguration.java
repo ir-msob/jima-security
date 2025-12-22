@@ -1,9 +1,9 @@
 package ir.msob.jima.security.api.restful.oauth2.test;
 
 import ir.msob.jima.core.beans.properties.JimaProperties;
+import ir.msob.jima.core.commons.condition.ConditionalOnReactiveOrNone;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.apachecommons.CommonsLog;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,7 +24,7 @@ import reactor.core.publisher.Mono;
 @CommonsLog
 @Configuration
 @RequiredArgsConstructor
-@ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.REACTIVE)
+@ConditionalOnReactiveOrNone
 public class WebTestClientConfiguration {
 
     private final JimaProperties jimaProperties;

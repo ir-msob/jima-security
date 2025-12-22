@@ -1,6 +1,6 @@
 package ir.msob.jima.security.commons;
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
+import ir.msob.jima.core.commons.condition.ConditionalOnReactiveOrNone;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.oauth2.client.AuthorizedClientServiceReactiveOAuth2AuthorizedClientManager;
@@ -15,7 +15,7 @@ import org.springframework.security.oauth2.client.registration.ReactiveClientReg
  * Author: Yaqub Abdi
  */
 @Configuration
-@ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.REACTIVE)
+@ConditionalOnReactiveOrNone
 public class Auth2ClientReactiveConfiguration {
 
     /**

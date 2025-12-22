@@ -25,7 +25,7 @@
         <dependency>
             <groupId>ir.msob.jima.core</groupId>
             <artifactId>core-beans</artifactId>
-            <version>${jima-commons.version}</version>
+            <version>${jima-core.version}</version>
         </dependency>
     </dependencies>
 

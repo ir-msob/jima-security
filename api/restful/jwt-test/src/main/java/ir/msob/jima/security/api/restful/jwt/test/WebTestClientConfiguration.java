@@ -1,9 +1,9 @@
 package ir.msob.jima.security.api.restful.jwt.test;
 
+import ir.msob.jima.core.commons.condition.ConditionalOnReactiveOrNone;
 import ir.msob.jima.core.commons.security.BaseTokenService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.apachecommons.CommonsLog;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,7 +27,7 @@ import reactor.core.publisher.Mono;
 @CommonsLog
 @Configuration
 @RequiredArgsConstructor
-@ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.REACTIVE)
+@ConditionalOnReactiveOrNone
 public class WebTestClientConfiguration {
 
     private final BaseTokenService tokenService;
