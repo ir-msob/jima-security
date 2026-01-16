@@ -1,5 +1,7 @@
 package ir.msob.jima.security.api.grpc.oauth2;
 
+import ir.msob.jima.core.commons.logger.Logger;
+import ir.msob.jima.core.commons.logger.LoggerFactory;
 import ir.msob.jima.security.commons.JwtRoleConverter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,8 +24,8 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
  */
 @Configuration
 @RequiredArgsConstructor
-@Slf4j
 public class GrpcAuthenticationConfiguration {
+    private static final Logger logger = LoggerFactory.getLogger(GrpcAuthenticationConfiguration.class);
 
     /**
      * Creates an {@link AuthenticationReader} bean for JWT token authentication.
@@ -40,35 +42,35 @@ public class GrpcAuthenticationConfiguration {
      */
     @Bean
     public AuthenticationReader authenticationReader(JwtDecoder jwtDecoder, JwtRoleConverter jwtRoleConverter) {
-        log.debug("Creating AuthenticationReader bean with JWT decoder and role converter");
+        logger.debug("Creating AuthenticationReader bean with JWT decoder and role converter");
 
         return token -> {
             if (token == null || token.trim().isEmpty()) {
-                log.warn("Attempted to authenticate with null or empty token");
+                logger.warn("Attempted to authenticate with null or empty token");
                 throw new IllegalArgumentException("Token cannot be null or empty");
             }
 
             try {
-                log.debug("Decoding JWT token for authentication");
+                logger.debug("Decoding JWT token for authentication");
                 Jwt jwt = jwtDecoder.decode(token);
 
-                log.debug("Converting JWT claims to authorities");
+                logger.debug("Converting JWT claims to authorities");
                 var authorities = jwtRoleConverter.convert(jwt);
 
-                log.debug("Creating JwtAuthenticationToken with {} authorities", authorities);
+                logger.debug("Creating JwtAuthenticationToken with {} authorities", authorities);
                 JwtAuthenticationToken authentication = new JwtAuthenticationToken(jwt, authorities);
 
-                if (log.isDebugEnabled()) {
-                    log.debug("Authentication created for subject: {}", jwt.getSubject());
+                if (logger.isDebugEnabled()) {
+                    logger.debug("Authentication created for subject: {}", jwt.getSubject());
                 }
 
                 return authentication;
 
             } catch (JwtException e) {
-                log.warn("JWT token validation failed: {}", e.getMessage());
+                logger.warn("JWT token validation failed: {}", e.getMessage());
                 throw e;
             } catch (Exception e) {
-                log.error("Unexpected error during authentication: {}", e.getMessage(), e);
+                logger.error("Unexpected error during authentication: {}", e.getMessage(), e);
                 throw new RuntimeException("Authentication processing failed", e);
             }
         };

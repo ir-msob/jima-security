@@ -1,9 +1,10 @@
 package ir.msob.jima.security.api.restful.jwt;
 
 import ir.msob.jima.core.commons.condition.ConditionalOnReactiveOrNone;
+import ir.msob.jima.core.commons.logger.Logger;
+import ir.msob.jima.core.commons.logger.LoggerFactory;
 import ir.msob.jima.core.commons.security.BaseTokenService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.apachecommons.CommonsLog;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -35,10 +36,10 @@ import reactor.core.publisher.Mono;
  * @since 1.0.0
  */
 @Configuration
-@CommonsLog
 @RequiredArgsConstructor
 @ConditionalOnReactiveOrNone
 public class WebClientConfiguration {
+    private static final Logger logger = LoggerFactory.getLogger(WebClientConfiguration.class);
 
     private final BaseTokenService tokenService;
 
@@ -49,7 +50,7 @@ public class WebClientConfiguration {
      */
     private static ExchangeFilterFunction logRequest() {
         return ExchangeFilterFunction.ofRequestProcessor(request -> {
-            log.info("Request: " + request.method() + " " + request.url());
+            logger.info("Request: " + request.method() + " " + request.url());
             return Mono.just(request);
         });
     }

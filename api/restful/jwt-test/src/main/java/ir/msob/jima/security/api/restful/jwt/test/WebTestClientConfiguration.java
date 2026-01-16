@@ -1,9 +1,10 @@
 package ir.msob.jima.security.api.restful.jwt.test;
 
 import ir.msob.jima.core.commons.condition.ConditionalOnReactiveOrNone;
+import ir.msob.jima.core.commons.logger.Logger;
+import ir.msob.jima.core.commons.logger.LoggerFactory;
 import ir.msob.jima.core.commons.security.BaseTokenService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.apachecommons.CommonsLog;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,12 +25,12 @@ import reactor.core.publisher.Mono;
  * <p>
  * Author: Yaqub Abdi
  */
-@CommonsLog
 @Configuration
 @RequiredArgsConstructor
 @ConditionalOnReactiveOrNone
 public class WebTestClientConfiguration {
 
+    private static final Logger logger = LoggerFactory.getLogger(WebTestClientConfiguration.class);
     private final BaseTokenService tokenService;
     private final ApplicationContext applicationContext;
 
@@ -40,12 +41,9 @@ public class WebTestClientConfiguration {
      *
      * @return an ExchangeFilterFunction that logs requests
      */
-    private static ExchangeFilterFunction logRequest() {
+    private ExchangeFilterFunction logRequest() {
         return ExchangeFilterFunction.ofRequestProcessor(clientRequest -> {
-            log.info("=== REQUEST ===");
-            log.info("Method: " + clientRequest.method());
-            log.info("URL: " + clientRequest.url());
-            log.info("Headers: " + clientRequest.headers());
+            logger.info("REQUEST Method: {}, URL: {}, Headers: {}", clientRequest.method(), clientRequest.url(), clientRequest.headers());
             return Mono.just(clientRequest);
         });
     }

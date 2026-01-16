@@ -2,8 +2,9 @@ package ir.msob.jima.security.api.restful.oauth2;
 
 import ir.msob.jima.core.beans.properties.JimaProperties;
 import ir.msob.jima.core.commons.condition.ConditionalOnReactiveOrNone;
+import ir.msob.jima.core.commons.logger.Logger;
+import ir.msob.jima.core.commons.logger.LoggerFactory;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.apachecommons.CommonsLog;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,13 +22,13 @@ import reactor.core.publisher.Mono;
  * <p>
  * Author: Yaqub Abdi
  */
-@CommonsLog
 @Configuration
 @RequiredArgsConstructor
 @ConditionalOnReactiveOrNone
 public class WebClientConfiguration {
 
     private final JimaProperties jimaProperties;
+    private static final Logger logger = LoggerFactory.getLogger(WebClientConfiguration.class);
 
     /**
      * Create an ExchangeFilterFunction for logging HTTP requests.
@@ -36,7 +37,7 @@ public class WebClientConfiguration {
      */
     private static ExchangeFilterFunction logRequest() {
         return ExchangeFilterFunction.ofRequestProcessor(clientRequest -> {
-            log.info("Request: " + clientRequest.method() + " " + clientRequest.url());
+            logger.info("Request: " + clientRequest.method() + " " + clientRequest.url());
             return Mono.just(clientRequest);
         });
     }

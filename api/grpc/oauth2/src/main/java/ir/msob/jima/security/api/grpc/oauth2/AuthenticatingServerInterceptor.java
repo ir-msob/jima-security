@@ -1,9 +1,10 @@
 package ir.msob.jima.security.api.grpc.oauth2;
 
 import io.grpc.*;
+import ir.msob.jima.core.commons.logger.Logger;
+import ir.msob.jima.core.commons.logger.LoggerFactory;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.Authentication;
@@ -22,8 +23,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
  */
 @Configuration
 @RequiredArgsConstructor
-@Slf4j
 public class AuthenticatingServerInterceptor implements ServerInterceptor {
+    private static final Logger logger = LoggerFactory.getLogger(AuthenticatingServerInterceptor.class);
 
     /**
      * Constant for Bearer token prefix length.
@@ -59,17 +60,17 @@ public class AuthenticatingServerInterceptor implements ServerInterceptor {
             Metadata metadata,
             ServerCallHandler<ReqT, RespT> serverCallHandler) {
 
-        log.debug("Intercepting gRPC call for authentication");
+        logger.debug("Intercepting gRPC call for authentication");
 
         String authorizationHeader = metadata.get(AUTHORIZATION_KEY);
 
         if (StringUtils.isBlank(authorizationHeader)) {
-            log.debug("Authorization header is missing, proceeding without authentication");
+            logger.debug("Authorization header is missing, proceeding without authentication");
             return serverCallHandler.startCall(serverCall, metadata);
         }
 
         if (!authorizationHeader.startsWith("Bearer ")) {
-            log.warn("Invalid authorization header format. Expected Bearer token");
+            logger.warn("Invalid authorization header format. Expected Bearer token");
             throw Status.UNAUTHENTICATED
                     .withDescription("Invalid authorization format. Expected: Bearer <token>")
                     .asRuntimeException();
@@ -79,17 +80,17 @@ public class AuthenticatingServerInterceptor implements ServerInterceptor {
             String token = authorizationHeader.substring(BEARER_PREFIX_LENGTH).trim();
 
             if (StringUtils.isBlank(token)) {
-                log.warn("Bearer token is empty");
+                logger.warn("Bearer token is empty");
                 throw Status.UNAUTHENTICATED
                         .withDescription("Bearer token is empty")
                         .asRuntimeException();
             }
 
-            log.debug("Attempting to authenticate with JWT token");
+            logger.debug("Attempting to authenticate with JWT token");
             Authentication authentication = authenticationReader.readAuthentication(token);
 
             if (authentication == null || !authentication.isAuthenticated()) {
-                log.warn("Authentication failed: invalid or expired token");
+                logger.warn("Authentication failed: invalid or expired token");
                 throw Status.UNAUTHENTICATED
                         .withDescription("Authentication failed: invalid or expired token")
                         .asRuntimeException();
@@ -97,18 +98,18 @@ public class AuthenticatingServerInterceptor implements ServerInterceptor {
 
             // Set authentication in security context
             SecurityContextHolder.getContext().setAuthentication(authentication);
-            log.debug("Authentication successful for principal: {}", authentication.getName());
+            logger.debug("Authentication successful for principal: {}", authentication.getName());
 
             return serverCallHandler.startCall(serverCall, metadata);
 
         } catch (StatusRuntimeException e) {
             // Re-throw gRPC status exceptions
             SecurityContextHolder.clearContext();
-            log.error("Authentication failed with gRPC status: {}", e.getStatus().getDescription());
+            logger.error("Authentication failed with gRPC status: {}", e.getStatus().getDescription());
             throw e;
         } catch (Exception e) {
             SecurityContextHolder.clearContext();
-            log.error("Authentication request failed: {}", e.getMessage(), e);
+            logger.error("Authentication request failed: {}", e.getMessage(), e);
             throw Status.UNAUTHENTICATED
                     .withDescription("Authentication processing failed")
                     .withCause(e)

@@ -2,7 +2,6 @@ package ir.msob.jima.security.ral.keycloak.test;
 
 import dasniko.testcontainers.keycloak.KeycloakContainer;
 import ir.msob.jima.core.beans.properties.JimaProperties;
-import lombok.extern.apachecommons.CommonsLog;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SpringBootTest(classes = {TestMicroserviceApplication.class, KeycloakContainerConfiguration.class})
 @ContextConfiguration
 @Testcontainers
-@CommonsLog
 class KeycloakContainerConfigurationIT {
 
     @Autowired
