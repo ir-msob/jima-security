@@ -1,6 +1,7 @@
 package ir.msob.jima.security.commons;
 
 import ir.msob.jima.core.commons.security.BaseClaimKey;
+import org.jspecify.annotations.NonNull;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -36,7 +37,7 @@ import java.util.List;
  * @author Yaqub Abdi
  * @since 0.1.0
  */
-public class JwtRoleConverter implements Converter<Jwt, Collection<GrantedAuthority>> {
+public class JwtRoleConverter implements Converter<@NonNull Jwt, Collection<GrantedAuthority>> {
 
     /**
      * Converts the 'roles' claim from the JWT into a collection of GrantedAuthority objects.

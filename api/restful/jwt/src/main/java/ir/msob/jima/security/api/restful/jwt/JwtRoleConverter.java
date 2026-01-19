@@ -1,6 +1,7 @@
 package ir.msob.jima.security.api.restful.jwt;
 
 import ir.msob.jima.core.commons.security.BaseClaimKey;
+import org.jspecify.annotations.NonNull;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -32,7 +33,7 @@ import java.util.Map;
  * @since 0.1.0
  */
 @Component
-public class JwtRoleConverter implements Converter<Map<String, Object>, Collection<GrantedAuthority>> {
+public class JwtRoleConverter implements Converter<@NonNull Map<String, Object>, Collection<GrantedAuthority>> {
 
     /**
      * Converts the 'roles' claim from JWT claims into a collection of {@link GrantedAuthority}.

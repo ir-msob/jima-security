@@ -4,7 +4,6 @@ import ir.msob.jima.core.commons.logger.Logger;
 import ir.msob.jima.core.commons.logger.LoggerFactory;
 import ir.msob.jima.security.commons.JwtRoleConverter;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.oauth2.jwt.Jwt;
@@ -60,9 +59,7 @@ public class GrpcAuthenticationConfiguration {
                 logger.debug("Creating JwtAuthenticationToken with {} authorities", authorities);
                 JwtAuthenticationToken authentication = new JwtAuthenticationToken(jwt, authorities);
 
-                if (logger.isDebugEnabled()) {
-                    logger.debug("Authentication created for subject: {}", jwt.getSubject());
-                }
+                logger.debug("Authentication created for subject: {}", jwt.getSubject());
 
                 return authentication;
 

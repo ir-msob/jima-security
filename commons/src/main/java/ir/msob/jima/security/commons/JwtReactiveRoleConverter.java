@@ -9,6 +9,7 @@
 package ir.msob.jima.security.commons;
 
 import ir.msob.jima.core.commons.security.BaseClaimKey;
+import org.jspecify.annotations.NonNull;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -21,7 +22,7 @@ import java.util.List;
 /**
  * Converts JWT to a Flux of GrantedAuthority based on the roles present in the JWT claims.
  */
-public class JwtReactiveRoleConverter implements Converter<Jwt, Flux<GrantedAuthority>> {
+public class JwtReactiveRoleConverter implements Converter<@NonNull Jwt, Flux<@NonNull GrantedAuthority>> {
 
     /**
      * Converts a JWT into a Flux of GrantedAuthority.
@@ -30,7 +31,7 @@ public class JwtReactiveRoleConverter implements Converter<Jwt, Flux<GrantedAuth
      * @return A Flux of GrantedAuthority representing the roles extracted from the JWT.
      */
     @Override
-    public Flux<GrantedAuthority> convert(Jwt jwt) {
+    public Flux<@NonNull GrantedAuthority> convert(Jwt jwt) {
         List<String> roles = extractRoles(jwt);
         return roles.isEmpty() ? Flux.empty() :
                 Flux.fromIterable(roles)

@@ -11,8 +11,7 @@ public class TestBeanConfiguration {
 
     @Bean
     public DynamicPropertyRegistrar dynamicPropertyRegistrar(KeycloakContainer kafkaContainer, JimaProperties jimaProperties) {
-        return registry -> {
-            KeycloakContainerConfiguration.registry(registry, kafkaContainer, jimaProperties);
-        };
+        return registry ->
+                KeycloakContainerConfiguration.registry(registry, kafkaContainer, jimaProperties);
     }
 }

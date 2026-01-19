@@ -27,8 +27,8 @@ import reactor.core.publisher.Mono;
 @ConditionalOnReactiveOrNone
 public class WebClientConfiguration {
 
-    private final JimaProperties jimaProperties;
     private static final Logger logger = LoggerFactory.getLogger(WebClientConfiguration.class);
+    private final JimaProperties jimaProperties;
 
     /**
      * Create an ExchangeFilterFunction for logging HTTP requests.

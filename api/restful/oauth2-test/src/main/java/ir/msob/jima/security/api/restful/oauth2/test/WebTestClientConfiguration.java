@@ -56,12 +56,6 @@ public class WebTestClientConfiguration {
     }
 
     /**
-     * Create a primary WebTestClient.Builder with OAuth2 integration.
-     *
-     * @param authorizedClientManager The manager for OAuth2 authorized clients.
-     * @return The WebTestClient.Builder instance.
-     */
-    /**
      * Expose the builder. Do NOT create and expose a WebTestClient bean yourself —
      * let Spring Boot create it so it's bound to the random port/test context.
      */

@@ -21,7 +21,6 @@ import java.util.Map;
  * Map<String, Object> parsedClaims = tokenService.validateAndParse(token, "secretKey", 3600000L, "HS256");
  * }</pre>
  *
- * @author
  * @since 0.1.0
  */
 public interface BaseJwtTokenService {
