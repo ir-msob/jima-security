@@ -16,7 +16,7 @@
         <dependency>
             <groupId>ir.msob.jima.security</groupId>
             <artifactId>security-api-restful-oauth2</artifactId>
-            <version>${project.version}</version>
+            <version>${project.parent.version}</version>
         </dependency>
 
         <dependency>
