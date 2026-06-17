@@ -1,0 +1,16 @@
+package ir.msob.jima.security.keycloak.testing;
+
+import ir.msob.jima.platform.api.security.BaseClaimKey;
+
+/**
+ * @author Yaqub Abdi
+ */
+public class ProjectClaimKey extends BaseClaimKey {
+    public static final String REALM_ACCESS = "realm_access";
+    public static final String KEYCLOAK_ROLES = "roles";
+
+    private ProjectClaimKey() {
+        super();
+    }
+
+}

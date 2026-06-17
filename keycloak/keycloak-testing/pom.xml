@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>ir.msob.jima.framework</groupId>
+        <artifactId>jima-framework-parent</artifactId>
+        <version>2.0.0</version>
+    </parent>
+    <artifactId>jima-security-keycloak-testing</artifactId>
+    <name>jima-security-keycloak-testing</name>
+    <description>jima-security-keycloak-testing</description>
+    <dependencies>
+        <!-- Framework -->
+        <dependency>
+            <groupId>ir.msob.jima.framework</groupId>
+            <artifactId>jima-platform-testing</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <!-- Test -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>testcontainers-junit-jupiter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-testcontainers</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.dasniko</groupId>
+            <artifactId>testcontainers-keycloak</artifactId>
+        </dependency>
+
+        <!-- Framework Test -->
+        <dependency>
+            <groupId>ir.msob.jima.framework</groupId>
+            <artifactId>jima-platform-autoconfigure</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>

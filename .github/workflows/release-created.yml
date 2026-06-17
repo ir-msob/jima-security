@@ -1,0 +1,24 @@
+# This workflow is triggered when a new release is created.
+# It invokes a workflow to handle the release process.
+
+name: Release - created
+
+on:
+  release:
+    types: [created] # Trigger the workflow when a release is created
+
+jobs:
+  # Job 1: Handle the creation of the release
+  invoke_release_created:
+    permissions:
+      contents: read # Grant permission to read repository contents
+      packages: write # Grant permission to write to packages
+    uses: ir-msob/jima-workflow/.github/workflows/release-created.yml@main # Reference to the release handling workflow
+    with:
+      npm_repository_url: ${{ vars.NPM_REPOSITORY_URL }} # URL of the NPM repository for publishing
+    secrets:
+      npm_repository_token: ${{ secrets.NPM_REPOSITORY_TOKEN }} # Token for authenticating with the NPM repository
+      gpg_secret_key: ${{ secrets.GPG_SECRET_KEY }} # GPG secret key for signing
+      maven_repository_username: ${{ secrets.MAVEN_REPOSITORY_USERNAME }} # Username for Maven repository authentication
+      maven_repository_token: ${{ secrets.MAVEN_REPOSITORY_TOKEN }} # Token for authenticating with the Maven repository
+      gpg_secret_key_password: ${{ secrets.GPG_SECRET_KEY_PASSWORD }} # Password for the GPG secret key

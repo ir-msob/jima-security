@@ -1,0 +1,28 @@
+# This workflow is triggered for pull requests targeting the main branch.
+# It invokes a workflow to handle SonarQube analysis for the pull request.
+
+name: Pull Request - main
+
+on:
+  pull_request:
+    branches: [ "main" ] # Trigger the workflow for pull requests to the main branch
+
+jobs:
+  # Job 1: Handle the pull request for the main branch
+  invoke_pull_request_main:
+    permissions:
+      contents: read # Grant permission to read repository contents
+      packages: write # Grant permission to write to packages
+      issues: write # Grant permission to write issues
+      pull-requests: write # Grant permission to write pull requests
+    uses: ir-msob/jima-workflow/.github/workflows/pull-request-main.yml@main # Reference to the pull request workflow
+    with:
+      sonar_host_url: ${{ vars.SONAR_HOST_URL }} # SonarQube host URL
+      sonar_java_binaries: ${{ vars.SONAR_JAVA_BINARIES }} # Paths to Java binaries for analysis
+      sonar_java_libraries: ${{ vars.SONAR_JAVA_LIBRARIES }} # Paths to Java libraries for analysis
+      sonar_organization: ${{ vars.SONAR_ORGANIZATION }} # SonarQube organization
+      sonar_project_key: ${{ vars.SONAR_PROJECT_KEY }} # SonarQube project key
+      sonar_coverage_jacoco_xml_report_paths: ${{ vars.SONAR_COVERAGE_JACOCO_XML_REPORT_PATHS }} # JaCoCo coverage report paths
+      sonar_maven_plugin_version: ${{ vars.SONAR_MAVEN_PLUGIN_VERSION }} # Sonar Maven plugin version
+    secrets:
+      sonar_token: ${{ secrets.SONAR_TOKEN }} # SonarQube token for authentication

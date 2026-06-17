@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>ir.msob.jima.framework</groupId>
+        <artifactId>jima-framework-parent</artifactId>
+        <version>2.0.0</version>
+    </parent>
+    <artifactId>jima-security-reactive</artifactId>
+    <name>jima-security-reactive</name>
+    <description>jima-security-reactive</description>
+    <dependencies>
+        <!-- Framework -->
+        <dependency>
+            <groupId>ir.msob.jima.framework</groupId>
+            <artifactId>jima-security-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ir.msob.jima.framework</groupId>
+            <artifactId>jima-platform-reactive</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+</project>
